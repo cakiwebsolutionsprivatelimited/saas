@@ -1,7 +1,9 @@
 export default function Home() {
   return (
-    <main>
-      <h1>Cakiweb SaaS Platform</h1>
+    <main className="p-xl">
+      <div className="bg-primary text-inverse rounded-lg p-lg shadow-md">
+        Cakiweb SaaS Project Started
+      </div>
     </main>
   );
 }
