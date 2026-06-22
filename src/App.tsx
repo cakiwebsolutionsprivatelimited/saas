@@ -1,12 +1,12 @@
-import './App.css'
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes';
+import './App.css';
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold">
-        Tailwind Working 🚀
-      </h1>
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
