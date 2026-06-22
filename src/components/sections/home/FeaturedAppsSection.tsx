@@ -69,7 +69,7 @@ export default function FeaturedAppsSection() {
     <Section className="bg-gray-50">
       <Container>
         <div className="text-center mx-auto mb-6 flex justify-center">
-          <span className="inline-flex items-center rounded-full bg-indigo-100/80 px-4 py-1.5 text-sm font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+          <span className="inline-flex items-center rounded-full bg-indigo-100/80 px-5 py-1.5 font-heading text-xl font-bold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
             App Marketplace
           </span>
         </div>

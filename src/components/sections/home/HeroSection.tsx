@@ -34,7 +34,7 @@ export default function HeroSection() {
               
               {/* Headline */}
               <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-[4rem] xl:leading-[1.1]">
-                Run your entire business from <span className="text-primary">one platform.</span>
+                Run your entire business from <span className="font-heading font-bold text-primary">one platform.</span>
               </h1>
               
               {/* Description */}
