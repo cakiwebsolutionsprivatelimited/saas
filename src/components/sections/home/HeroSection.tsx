@@ -18,7 +18,7 @@ import {
 
 export default function HeroSection() {
   return (
-    <Section className="relative overflow-hidden bg-background pt-16 pb-20 md:pt-24 lg:pt-32 lg:pb-32">
+    <Section className="relative overflow-hidden bg-background">
       <Container>
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-8 items-center">
           
