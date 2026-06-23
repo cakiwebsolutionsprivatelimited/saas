@@ -1,4 +1,4 @@
-import { AppCategory } from '../types';
+import type { AppCategory } from '../types';
 
 export const categories: AppCategory[] = [
   {
