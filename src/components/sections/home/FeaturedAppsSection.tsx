@@ -1,7 +1,6 @@
 import React from 'react';
 import { Section } from '../../ui/Section';
 import { Container } from '../../ui/Container';
-import { SectionHeading } from '../../ui/SectionHeading';
 import { apps } from '../../../data/apps';
 import { 
   Users,
@@ -38,86 +37,126 @@ const getAppTheme = (appId: string) => {
   }
 };
 
-const getBadgeStyles = (badge: string | undefined) => {
-  if (!badge) return null;
-  
-  const baseClasses = "inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider";
-  
-  switch (badge.toLowerCase()) {
-    case 'popular':
-      return `${baseClasses} bg-indigo-600 text-white shadow-sm`;
-    case 'essential':
-      return `${baseClasses} bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20`;
-    case 'core':
-      return `${baseClasses} bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-600/20`;
-    case 'coming soon':
-      return `${baseClasses} bg-gray-50 text-gray-500 ring-1 ring-inset ring-gray-500/10`;
-    case 'available':
-      return `${baseClasses} bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20`;
-    default:
-      return `${baseClasses} bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-600/20`;
+const CATEGORIES = [
+  {
+    id: 'sales-crm',
+    title: 'Sales & CRM',
+    icon: Users,
+    color: 'text-indigo-600 bg-indigo-50 ring-1 ring-inset ring-indigo-600/20',
+    appIds: ['crm', 'sales']
+  },
+  {
+    id: 'finance',
+    title: 'Finance',
+    icon: Wallet,
+    color: 'text-blue-600 bg-blue-50 ring-1 ring-inset ring-blue-600/20',
+    appIds: ['billing', 'accounts']
+  },
+  {
+    id: 'operations',
+    title: 'Operations',
+    icon: Package,
+    color: 'text-amber-600 bg-amber-50 ring-1 ring-inset ring-amber-600/20',
+    appIds: ['inventory', 'projects', 'field-service', 'helpdesk']
+  },
+  {
+    id: 'people',
+    title: 'People',
+    icon: Users2,
+    color: 'text-rose-600 bg-rose-50 ring-1 ring-inset ring-rose-600/20',
+    appIds: ['hrms', 'payroll']
+  },
+  {
+    id: 'growth',
+    title: 'Growth',
+    icon: Megaphone,
+    color: 'text-emerald-600 bg-emerald-50 ring-1 ring-inset ring-emerald-600/20',
+    appIds: ['marketing', 'website']
   }
-};
-
-const getActionText = (badge: string | undefined) => {
-  if (badge?.toLowerCase() === 'coming soon') return 'Get Notified';
-  return 'Learn More';
-};
+];
 
 export default function FeaturedAppsSection() {
   return (
-    <Section className="bg-gray-50">
+    <Section className="bg-slate-50 py-24 sm:py-32">
       <Container>
-        <div className="text-center mx-auto mb-6 flex justify-center">
-          <span className="inline-flex items-center rounded-full bg-indigo-100/80 px-5 py-1.5 font-heading text-xl font-bold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
-            App Marketplace
-          </span>
+        {/* Section Header */}
+        <div className="text-center mx-auto mb-16 lg:mb-24 max-w-3xl">
+          <div className="inline-flex items-center rounded-full bg-indigo-100/80 px-4 py-1.5 font-heading text-sm font-bold text-indigo-800 ring-1 ring-inset ring-indigo-600/20 mb-6">
+            App Ecosystem
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl mb-6">
+            A Platform That Grows With You
+          </h2>
+          <p className="text-lg leading-relaxed text-slate-600">
+            Everything your business needs seamlessly connected in one ecosystem. Start with what you need, and add more later.
+          </p>
         </div>
         
-        <SectionHeading 
-          title="Choose the apps your business needs"
-          subtitle="Everything your business needs in one connected platform. Start with what you need, and add more as you grow."
-        />
-        
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {apps.map((app) => {
-            const Theme = getAppTheme(app.id);
-            const Icon = Theme.icon;
+        {/* Ecosystem Masonry Grid */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 w-full">
+          {CATEGORIES.map((category) => {
+            const categoryApps = category.appIds.map(id => apps.find(a => a.id === id)).filter(Boolean);
+            const CategoryIcon = category.icon;
             
             return (
-              <a
-                key={app.id}
-                href={`/apps/${app.id}`}
-                className="group relative flex h-full flex-col rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-2 hover:ring-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
-                aria-label={`Learn more about ${app.name} app`}
+              <div 
+                key={category.id} 
+                className="break-inside-avoid-column mb-8 rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200 transition-all hover:shadow-md"
               >
-                {/* Top: Icon & Badge */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 shadow-sm ${Theme.classes}`}>
-                    <Icon className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                {/* Category Header */}
+                <div className="flex items-center gap-4 mb-8">
+                  <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${category.color}`}>
+                    <CategoryIcon className="h-7 w-7" strokeWidth={1.5} />
                   </div>
-                  {app.badge && (
-                    <span className={getBadgeStyles(app.badge) || ''}>
-                      {app.badge}
-                    </span>
-                  )}
+                  <h3 className="text-2xl font-bold text-slate-900">
+                    {category.title}
+                  </h3>
                 </div>
                 
-                {/* Middle: Name & Description */}
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors duration-200">
-                  {app.name}
-                </h3>
-                
-                <p className="text-sm text-gray-600 flex-grow mb-6 leading-relaxed">
-                  {app.description}
-                </p>
-
-                {/* Bottom: Action row */}
-                <div className="flex items-center text-sm font-semibold text-indigo-600 mt-auto pt-4 border-t border-gray-100 transition-colors duration-300 group-hover:text-indigo-700">
-                  {getActionText(app.badge)}
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                {/* Apps List */}
+                <div className="space-y-3">
+                  {categoryApps.map(app => {
+                    if (!app) return null;
+                    const Theme = getAppTheme(app.id);
+                    const AppIcon = Theme.icon;
+                    
+                    return (
+                      <a 
+                        key={app.id}
+                        href={`/apps/${app.id}`}
+                        className="group flex items-start gap-4 rounded-2xl p-4 transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200 hover:shadow-sm"
+                      >
+                        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 shadow-sm ${Theme.classes}`}>
+                          <AppIcon className="h-6 w-6" strokeWidth={1.5} />
+                        </div>
+                        <div className="flex-grow pt-0.5">
+                          <div className="flex flex-wrap items-center gap-2 mb-1">
+                            <h4 className="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                              {app.name}
+                            </h4>
+                            {app.badge && (
+                              <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-600 ring-1 ring-inset ring-slate-200">
+                                {app.badge}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                            {app.description}
+                          </p>
+                        </div>
+                      </a>
+                    );
+                  })}
                 </div>
-              </a>
+                
+                {/* Explore Category Link */}
+                <div className="mt-6 pt-6 border-t border-slate-100 flex justify-end">
+                  <a href={`/categories/${category.id}`} className="group/link inline-flex items-center text-sm font-bold text-indigo-600 hover:text-indigo-500 transition-colors">
+                    Explore {category.title}
+                    <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
+                  </a>
+                </div>
+              </div>
             );
           })}
         </div>

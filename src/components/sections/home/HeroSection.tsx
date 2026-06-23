@@ -34,12 +34,12 @@ export default function HeroSection() {
               
               {/* Headline */}
               <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-[4rem] xl:leading-[1.1]">
-                Run your entire business from <span className="font-heading font-bold text-primary">one platform.</span>
+                Connect every department on <span className="font-heading font-bold text-primary">one scalable platform.</span>
               </h1>
               
               {/* Description */}
               <p className="text-lg text-muted-foreground leading-relaxed sm:text-xl max-w-2xl font-medium">
-                CRM, Billing, Inventory, HRMS, Projects, Helpdesk, Marketing, Website, and Industry Solutions built for growing businesses.
+                Manage CRM, Billing, Inventory, HRMS, and Projects from a single unified ecosystem built for growing enterprises.
               </p>
             </div>
             
