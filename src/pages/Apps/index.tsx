@@ -21,7 +21,8 @@ export default function Apps() {
   const workflows = [
     {
       title: 'Lead to Cash',
-      description: 'Capture leads, convert opportunities, generate invoices, fulfil orders, and track revenue.',
+      outcome: 'Turn leads into revenue.',
+      description: 'Manage the entire customer lifecycle from lead capture to payment collection.',
       apps: [
         { id: 'crm', label: 'Capture Leads' },
         { id: 'sales', label: 'Create Quotations' },
@@ -32,7 +33,8 @@ export default function Apps() {
     },
     {
       title: 'Hire to Retire',
-      description: 'Manage employees from onboarding to payroll.',
+      outcome: 'Manage employees from onboarding to payroll.',
+      description: 'Create a consistent employee management process.',
       apps: [
         { id: 'hrms', label: 'Manage Employees' },
         { id: 'payroll', label: 'Run Payroll' }
@@ -40,7 +42,8 @@ export default function Apps() {
     },
     {
       title: 'Service Delivery',
-      description: 'Plan projects, deliver services, and support customers.',
+      outcome: 'Deliver projects and support customers efficiently.',
+      description: 'Plan work, deliver services, and provide ongoing support.',
       apps: [
         { id: 'projects', label: 'Plan & Execute' },
         { id: 'helpdesk', label: 'Support Customers' }
@@ -188,33 +191,38 @@ export default function Apps() {
       {/* 3. Workflows (Business Journeys) */}
       <Section className="bg-warm-cream border-t border-warm-sage py-24 lg:py-32 overflow-hidden relative">
         <Container>
-          <div className="max-w-3xl mb-24 text-center mx-auto">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-stone-900 mb-6 leading-tight">
+          <div className="max-w-4xl mb-24 text-center mx-auto">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-stone-900 mb-8 leading-tight">
               End-to-End Business Journeys
             </h2>
-            <p className="text-xl text-stone-600 font-medium leading-relaxed">
+            <p className="text-xl lg:text-2xl text-stone-600 font-medium leading-relaxed">
               Data flows seamlessly across departments, eliminating manual entry and breaking down silos. Here's how our apps work together to automate your core processes.
             </p>
           </div>
           
-          <div className="space-y-16 max-w-6xl mx-auto">
+          <div className="space-y-20 max-w-7xl mx-auto">
             {workflows.map((workflow, idx) => (
-              <div key={idx} className="bg-white border border-warm-sage rounded-3xl overflow-hidden shadow-sm flex flex-col md:flex-row hover:shadow-md transition-shadow">
+              <div key={idx} className="bg-white border border-warm-sage rounded-3xl p-10 lg:p-16 shadow-sm hover:shadow-md transition-shadow flex flex-col lg:flex-row gap-16 items-center">
                 
-                {/* Storytelling / Outcome side */}
-                <div className="bg-stone-900 text-white p-10 md:p-14 md:w-1/3 flex flex-col justify-center relative overflow-hidden">
-                  <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-indigo-600/30 blur-3xl"></div>
-                  <h3 className="text-3xl font-extrabold mb-6 relative z-10 leading-tight">{workflow.title}</h3>
-                  <p className="text-stone-300 font-medium text-lg leading-relaxed relative z-10">
+                {/* 40% Content Side */}
+                <div className="w-full lg:w-[40%] flex flex-col justify-center">
+                  <h3 className="text-4xl md:text-5xl font-extrabold text-stone-900 mb-8 leading-tight">
+                    {workflow.title}
+                  </h3>
+                  <div className="inline-block bg-indigo-50 border border-indigo-100 rounded-2xl p-5 mb-8">
+                    <span className="block text-sm font-bold text-indigo-600 uppercase tracking-widest mb-2">Business Outcome</span>
+                    <span className="text-2xl font-bold text-stone-900">{workflow.outcome}</span>
+                  </div>
+                  <p className="text-stone-600 font-medium text-lg lg:text-xl leading-relaxed">
                     {workflow.description}
                   </p>
                 </div>
 
-                {/* Flow / Cards side */}
-                <div className="p-10 md:p-14 md:w-2/3 bg-white flex items-center justify-center">
+                {/* 60% Flow Side */}
+                <div className="w-full lg:w-[60%] bg-warm-cream rounded-3xl border border-warm-sage p-8 lg:p-12 flex items-center justify-center">
                   <div className="flex flex-col md:flex-row items-start justify-between w-full relative">
                     {/* Desktop connector line */}
-                    <div className="hidden md:block absolute top-8 left-10 right-10 h-px bg-warm-sage z-0"></div>
+                    <div className="hidden md:block absolute top-10 left-12 right-12 h-1 bg-warm-sage z-0 rounded-full"></div>
                     
                     {workflow.apps.map((step, appIdx) => {
                       const app = apps.find(a => a.id === step.id);
@@ -223,24 +231,24 @@ export default function Apps() {
                       return (
                         <React.Fragment key={app.id}>
                           <div className="flex flex-col items-center relative z-10 flex-1 group mt-4 md:mt-0">
-                            <div className="h-16 w-16 rounded-xl bg-white border border-warm-sage flex items-center justify-center text-indigo-600 shadow-sm mb-5 group-hover:border-indigo-600 group-hover:-translate-y-1 group-hover:shadow-md transition-all">
-                              {Icon && <Icon className="h-7 w-7" />}
+                            <div className="h-20 w-20 rounded-2xl bg-white border-2 border-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm mb-6 group-hover:border-indigo-600 group-hover:-translate-y-1 group-hover:shadow-md transition-all duration-300">
+                              {Icon && <Icon className="h-8 w-8" />}
                             </div>
-                            <div className="flex flex-col items-center text-center px-1">
-                              <span className="font-bold text-stone-900 text-sm mb-1">{step.label}</span>
-                              <span className="text-[11px] font-bold text-stone-500 uppercase tracking-widest">{app.name}</span>
+                            <div className="flex flex-col items-center text-center px-2">
+                              <span className="font-extrabold text-stone-900 text-base lg:text-lg mb-1">{step.label}</span>
+                              <span className="text-xs font-bold text-stone-500 uppercase tracking-widest">{app.name}</span>
                             </div>
                           </div>
                           
                           {appIdx < workflow.apps.length - 1 && (
-                            <div className="flex items-center justify-center text-warm-sage md:hidden h-12 z-0 w-full">
-                              <ArrowDown className="h-5 w-5" />
+                            <div className="flex items-center justify-center text-indigo-300 md:hidden h-16 z-0 w-full">
+                              <ArrowDown className="h-8 w-8" />
                             </div>
                           )}
                           
                           {appIdx < workflow.apps.length - 1 && (
-                            <div className="hidden md:flex items-center justify-center text-warm-sage w-6 pt-5 z-10 relative bg-white px-1">
-                              <ArrowRight className="h-5 w-5" />
+                            <div className="hidden md:flex items-center justify-center text-indigo-300 w-10 pt-6 z-10 relative bg-warm-cream px-1">
+                              <ArrowRight className="h-8 w-8" />
                             </div>
                           )}
                         </React.Fragment>
