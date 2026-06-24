@@ -1,3 +1,5 @@
+import type { LucideIcon } from 'lucide-react';
+
 export interface AppCategory {
   id: string;
   name: string;
@@ -12,7 +14,7 @@ export interface App {
   description: string;
   category: string;
   badge?: string;
-  icon?: any;
+  icon?: LucideIcon;
   features: string[];
   industries: string[];
   isPopular?: boolean;
