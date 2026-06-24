@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/saas_public_site">
       <AppRoutes />
     </BrowserRouter>
   );
