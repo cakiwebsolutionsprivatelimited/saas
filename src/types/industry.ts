@@ -7,3 +7,26 @@ export interface Industry {
   recommendedApps: string[];
   benefits: string[];
 }
+
+export interface WorkflowStep {
+  step: string;
+  app: string;
+}
+
+export interface IndustryOutcome {
+  title: string;
+  desc: string;
+}
+
+export interface IndustryFAQ {
+  q: string;
+  a: string;
+}
+
+export interface IndustryContent {
+  tags: string[];
+  workflow: WorkflowStep[];
+  outcomes: IndustryOutcome[];
+  reasons: string[];
+  faqs: IndustryFAQ[];
+}
