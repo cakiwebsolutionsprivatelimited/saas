@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '../../components/ui/Container';
@@ -9,10 +9,11 @@ import { apps } from '../../data/apps';
 import { industryExtensions } from '../../data/industry-content';
 import { staggerContainer, fadeUp, slideInLeft, slideInRight } from '../../utils/animations';
 import { 
-  ArrowRight, CheckCircle2, XCircle, TrendingUp,
+  ArrowRight, XCircle,
   Briefcase, ShieldCheck, Factory, Truck, ShoppingCart, Stethoscope, 
-  GraduationCap, Wrench, Building, Dumbbell, Plus, Minus, ArrowDown, Activity
+  GraduationCap, Wrench, Building, Dumbbell, Plus, Minus, Activity
 } from 'lucide-react';
+import type { WorkflowStep, IndustryOutcome, IndustryFAQ } from '../../types';
 
 const getIndustryIcon = (id: string, className: string = "h-6 w-6") => {
   switch (id) {
@@ -36,16 +37,13 @@ export default function Industries() {
   const selectedIndustry = industries.find(i => i.id === selectedIndustryId) || industries[0];
   const details = industryExtensions[selectedIndustry.id] || industryExtensions['manufacturing'];
 
-  useEffect(() => {
-    setOpenFaqIndex(0);
-  }, [selectedIndustryId]);
-
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
   const handleSelectIndustry = (id: string) => {
     setSelectedIndustryId(id);
+    setOpenFaqIndex(0);
     if (contentRef.current) {
       const y = contentRef.current.getBoundingClientRect().top + window.scrollY - 100;
       window.scrollTo({ top: y, behavior: 'smooth' });
@@ -198,14 +196,14 @@ export default function Industries() {
                   <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-warm-sage -translate-y-1/2 z-0"></div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-                    {selectedIndustry.recommendedApps.slice(0, 4).map((appId, idx) => {
+                    {selectedIndustry.recommendedApps.slice(0, 4).map((appId) => {
                       const appDetails = apps.find(a => a.id === appId);
                       if (!appDetails) return null;
                       const Icon = appDetails.icon;
                       return (
                         <motion.div variants={fadeUp} key={appId} className="bg-white border border-warm-sage rounded-2xl p-8 shadow-sm flex flex-col items-center text-center hover:border-indigo-300 hover:shadow-md transition-all">
                           <div className="h-16 w-16 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-6 ring-4 ring-white shadow-sm">
-                            <Icon className="h-8 w-8" strokeWidth={2} />
+                            {Icon && <Icon className="h-8 w-8" strokeWidth={2} />}
                           </div>
                           <h3 className="text-xl font-bold text-stone-900 mb-3">{appDetails.name}</h3>
                           <p className="text-stone-600 font-medium text-sm">
@@ -240,7 +238,7 @@ export default function Industries() {
 
                   <motion.div variants={slideInRight} className="lg:w-2/3 w-full">
                     <div className="relative border-l-2 border-warm-sage ml-6 pl-10 space-y-16">
-                      {details.workflow.map((flow: any, idx: number) => (
+                      {details.workflow.map((flow: WorkflowStep, idx: number) => (
                         <div key={idx} className="relative">
                           {/* Dot indicator */}
                           <div className="absolute -left-[49px] top-1 h-6 w-6 rounded-full bg-indigo-600 ring-8 ring-white flex items-center justify-center">
@@ -292,7 +290,7 @@ export default function Industries() {
                   className="max-w-5xl mx-auto bg-stone-800/50 rounded-2xl border border-stone-700 backdrop-blur-sm overflow-hidden"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-stone-700">
-                    {details.outcomes.map((outcome: any, idx: number) => (
+                    {details.outcomes.map((outcome: IndustryOutcome, idx: number) => (
                       <motion.div variants={fadeUp} key={idx} className="p-10 flex flex-col items-center text-center hover:bg-stone-800/80 transition-colors">
                         <h3 className="text-2xl font-bold text-white mb-4">{outcome.title}</h3>
                         <div className="w-12 h-1 bg-indigo-500 mb-6 rounded-full"></div>
@@ -362,7 +360,7 @@ export default function Industries() {
                   </h2>
                   
                   <div className="space-y-2">
-                    {details.faqs.map((faq: any, idx: number) => (
+                    {details.faqs.map((faq: IndustryFAQ, idx: number) => (
                       <div 
                         key={idx} 
                         className={`border-b ${openFaqIndex === idx ? 'border-indigo-600' : 'border-warm-sage'} transition-all overflow-hidden`}

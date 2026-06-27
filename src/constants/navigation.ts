@@ -40,4 +40,5 @@ export const FOOTER_NAV: FooterNavGroup[] = [
 export const CTA_ROUTES = {
   login: '/login',
   requestDemo: '/request-demo',
+  pricing: '/pricing',
 };

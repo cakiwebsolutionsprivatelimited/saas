@@ -7,7 +7,6 @@ import { CTA_ROUTES } from '../../constants';
 import { staggerContainer, fadeUp, slideInLeft, slideInRight } from '../../utils/animations';
 import { 
   ArrowRight, 
-  CheckCircle2, 
   TrendingUp,
   Building2,
   Zap,
