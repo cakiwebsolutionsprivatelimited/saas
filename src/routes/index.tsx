@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import WebsiteLayout from '../layouts/WebsiteLayout';
 import Home from '../pages/Home';
 import Apps from '../pages/Apps';
+import ModuleDetail from '../pages/ModuleDetail';
 import Pricing from '../pages/Pricing';
 import Industries from '../pages/Industries';
 import RequestDemo from '../pages/RequestDemo';
@@ -14,6 +15,7 @@ export default function AppRoutes() {
       <Route element={<WebsiteLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/apps" element={<Apps />} />
+        <Route path="/apps/:slug" element={<ModuleDetail />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/industries" element={<Industries />} />
         <Route path="/request-demo" element={<RequestDemo />} />
