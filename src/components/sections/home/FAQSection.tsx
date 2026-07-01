@@ -39,17 +39,17 @@ export default function FAQSection() {
   };
 
   return (
-    <Section className="bg-white py-16 sm:py-20 border-t border-slate-100">
+    <Section className="bg-white py-16 sm:py-20 border-t border-warm-sage">
       <Container>
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center mb-16 lg:mb-16">
-          <div className="inline-flex items-center rounded-md bg-slate-100 px-4 py-1.5 font-heading text-sm font-bold text-slate-800 ring-1 ring-inset ring-slate-200/50 mb-6 shadow-sm">
+          <div className="inline-flex items-center rounded-md border border-warm-sage bg-warm-cream px-4 py-1.5 font-heading text-sm font-bold text-stone-700 mb-6 shadow-sm">
             Frequently Asked Questions
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl mb-6">
+          <h2 className="text-3xl font-extrabold tracking-tight text-stone-900 sm:text-4xl md:text-5xl mb-6">
             Questions Before You Get Started
           </h2>
-          <p className="text-lg leading-relaxed text-slate-600">
+          <p className="text-lg leading-relaxed text-stone-600 font-medium">
             Everything you need to know before choosing the platform.
           </p>
         </div>
@@ -64,18 +64,18 @@ export default function FAQSection() {
                 const index = idx;
                 const isOpen = openIndex === index;
                 return (
-                  <div key={index} className="border-b border-slate-200/80">
+                  <div key={index} className="border-b border-warm-sage/80">
                     <button
                       onClick={() => toggleAccordion(index)}
                       className="flex w-full items-center justify-between py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 rounded-lg transition-all group"
                       aria-expanded={isOpen}
                     >
-                      <span className={`text-lg font-bold transition-colors ${isOpen ? 'text-indigo-600' : 'text-slate-900 group-hover:text-indigo-600'}`}>
+                      <span className={`text-lg font-bold transition-colors ${isOpen ? 'text-indigo-600' : 'text-stone-900 group-hover:text-indigo-600'}`}>
                         {faq.question}
                       </span>
                       <ChevronDown
                         className={`h-5 w-5 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] ${
-                          isOpen ? 'rotate-180 text-indigo-600' : 'text-slate-400 group-hover:text-indigo-400'
+                          isOpen ? 'rotate-180 text-indigo-600' : 'text-stone-400 group-hover:text-indigo-400'
                         }`}
                       />
                     </button>
@@ -88,7 +88,7 @@ export default function FAQSection() {
                           transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
                           className="overflow-hidden"
                         >
-                          <p className="text-base text-slate-600 leading-relaxed pr-8 pb-6 pt-2">
+                          <p className="text-base text-stone-600 leading-relaxed pr-8 pb-6 pt-2 font-medium">
                             {faq.answer}
                           </p>
                         </motion.div>
@@ -105,18 +105,18 @@ export default function FAQSection() {
                 const index = idx + 3;
                 const isOpen = openIndex === index;
                 return (
-                  <div key={index} className="border-b border-slate-200/80">
+                  <div key={index} className="border-b border-warm-sage/80">
                     <button
                       onClick={() => toggleAccordion(index)}
                       className="flex w-full items-center justify-between py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 rounded-lg transition-all group"
                       aria-expanded={isOpen}
                     >
-                      <span className={`text-lg font-bold transition-colors ${isOpen ? 'text-indigo-600' : 'text-slate-900 group-hover:text-indigo-600'}`}>
+                      <span className={`text-lg font-bold transition-colors ${isOpen ? 'text-indigo-600' : 'text-stone-900 group-hover:text-indigo-600'}`}>
                         {faq.question}
                       </span>
                       <ChevronDown
                         className={`h-5 w-5 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] ${
-                          isOpen ? 'rotate-180 text-indigo-600' : 'text-slate-400 group-hover:text-indigo-400'
+                          isOpen ? 'rotate-180 text-indigo-600' : 'text-stone-400 group-hover:text-indigo-400'
                         }`}
                       />
                     </button>
@@ -129,7 +129,7 @@ export default function FAQSection() {
                           transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
                           className="overflow-hidden"
                         >
-                          <p className="text-base text-slate-600 leading-relaxed pr-8 pb-6 pt-2">
+                          <p className="text-base text-stone-600 leading-relaxed pr-8 pb-6 pt-2 font-medium">
                             {faq.answer}
                           </p>
                         </motion.div>

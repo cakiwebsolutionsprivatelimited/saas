@@ -25,8 +25,8 @@ export default function Header() {
     <header 
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/80 backdrop-blur-lg border-b border-slate-200/60 shadow-sm' 
-          : 'bg-white border-b border-slate-100'
+          ? 'bg-white/80 backdrop-blur-lg border-b border-warm-sage/80 shadow-sm' 
+          : 'bg-white border-b border-warm-sage'
       }`}
     >
       <Container>
@@ -39,7 +39,7 @@ export default function Header() {
                 alt={SITE_CONFIG.name} 
                 className="h-10 w-auto transition-transform duration-300 group-hover:scale-105" 
               />
-              <span className="text-2xl font-black tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
+              <span className="text-2xl font-black tracking-tight text-stone-900 group-hover:text-indigo-600 transition-colors">
                 {SITE_CONFIG.name}
               </span>
             </Link>
@@ -55,7 +55,7 @@ export default function Header() {
                   `text-sm font-semibold transition-colors duration-200 ${
                     isActive 
                       ? 'text-indigo-600' 
-                      : 'text-slate-600 hover:text-slate-900'
+                      : 'text-stone-600 hover:text-stone-900'
                   }`
                 }
               >
@@ -68,7 +68,7 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-6">
             <Link
               to={CTA_ROUTES.login}
-              className="text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900"
+              className="text-sm font-semibold text-stone-600 transition-colors hover:text-stone-900"
             >
               {SITE_CONFIG.secondaryCTA}
             </Link>
@@ -85,7 +85,7 @@ export default function Header() {
           <div className="flex items-center md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2.5 text-slate-600 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+              className="inline-flex items-center justify-center rounded-md p-2.5 text-stone-600 hover:bg-warm-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
               aria-controls="mobile-menu"
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -104,7 +104,7 @@ export default function Header() {
       {/* Mobile Navigation Menu */}
       <div 
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white ${
-          isMobileMenuOpen ? 'max-h-[500px] opacity-100 border-t border-slate-100 shadow-xl' : 'max-h-0 opacity-0'
+          isMobileMenuOpen ? 'max-h-[500px] opacity-100 border-t border-warm-sage shadow-xl' : 'max-h-0 opacity-0'
         }`}
         id="mobile-menu"
       >
@@ -119,7 +119,7 @@ export default function Header() {
                   `block rounded-md px-4 py-3 text-base font-bold transition-colors ${
                     isActive 
                       ? 'bg-indigo-50 text-indigo-700' 
-                      : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                      : 'text-stone-700 hover:bg-warm-cream hover:text-stone-900'
                   }`
                 }
               >
@@ -127,12 +127,12 @@ export default function Header() {
               </NavLink>
             ))}
           </div>
-          <div className="border-t border-slate-100 pb-8 pt-6">
+          <div className="border-t border-warm-sage pb-8 pt-6">
             <div className="flex flex-col gap-4 px-2">
               <Link
                 to={CTA_ROUTES.login}
                 onClick={closeMobileMenu}
-                className="block w-full rounded-md px-4 py-3 text-center text-base font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+                className="block w-full rounded-md px-4 py-3 text-center text-base font-bold text-stone-700 hover:bg-warm-cream transition-colors"
               >
                 {SITE_CONFIG.secondaryCTA}
               </Link>

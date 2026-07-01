@@ -90,7 +90,7 @@ const benefits = [
 
 export default function WhyChooseUsSection() {
   return (
-    <Section className="bg-white overflow-hidden border-t border-gray-100">
+    <Section className="bg-white overflow-hidden border-t border-warm-sage">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-start">
           {/* Left Column: Content */}
@@ -102,24 +102,24 @@ export default function WhyChooseUsSection() {
             variants={staggerContainer}
           >
             <motion.div variants={fadeUp}>
-              <div className="inline-flex items-center rounded-md bg-slate-100/80 px-4 py-1.5 font-heading text-sm font-bold text-slate-800 ring-1 ring-inset ring-slate-600/20 mb-6">
+              <div className="inline-flex items-center rounded-md border border-warm-sage bg-warm-cream px-4 py-1.5 font-heading text-sm font-bold text-stone-700 mb-6 shadow-sm">
                 Why Businesses Choose Us
               </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl mb-6 leading-[1.1]">
+              <h2 className="text-3xl font-extrabold tracking-tight text-stone-900 sm:text-4xl md:text-5xl mb-6 leading-[1.1]">
                 Everything Your Team Needs to Grow
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+              <p className="text-lg text-stone-600 leading-relaxed max-w-xl font-medium">
                 Manage sales, billing, inventory, employees, projects, and customer operations from one connected platform.
               </p>
             </motion.div>
             
             <motion.div className="hidden lg:block pt-8" variants={slideInLeft}>
-               <div className="p-8 bg-gradient-to-br from-slate-50 to-white rounded-xl border border-slate-200/60 shadow-sm relative overflow-hidden">
+               <div className="p-8 bg-gradient-to-br from-warm-cream to-white rounded-xl border border-warm-sage shadow-sm relative overflow-hidden">
                  <div className="absolute top-0 right-0 p-6 opacity-5">
                    <ShieldCheck className="w-24 h-24" />
                  </div>
                  <div className="relative z-10">
-                   <p className="text-slate-700 font-medium italic text-lg leading-relaxed mb-6">
+                   <p className="text-stone-700 font-medium italic text-lg leading-relaxed mb-6">
                      "We've consolidated 5 different tools into one unified platform. It's transformed how we operate and saved us countless hours."
                    </p>
                    <div className="flex items-center gap-4">
@@ -127,8 +127,8 @@ export default function WhyChooseUsSection() {
                        AJ
                      </div>
                      <div>
-                       <p className="text-base font-bold text-slate-900">Alex Johnson</p>
-                       <p className="text-sm text-slate-500 font-medium">Operations Director</p>
+                       <p className="text-base font-bold text-stone-900">Alex Johnson</p>
+                       <p className="text-sm text-stone-500 font-medium">Operations Director</p>
                      </div>
                    </div>
                  </div>
@@ -153,20 +153,20 @@ export default function WhyChooseUsSection() {
                     <motion.div 
                       key={benefit.title}
                       variants={fadeUp}
-                      className={`group relative flex flex-col rounded-xl bg-white p-8 shadow-sm border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${benefit.shadowColor} ${benefit.borderColor} hover:border-transparent`}
+                      className={`group relative flex flex-col rounded-xl bg-white p-8 shadow-sm border border-warm-sage transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${benefit.shadowColor} ${benefit.borderColor} hover:border-transparent`}
                     >
-                      <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-lg ${benefit.bgColor} ${benefit.color} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3`}>
+                      <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-lg ${benefit.bgColor} ${benefit.color} transition-transform duration-300 group-hover:scale-110`}>
                         <Icon className="h-7 w-7" strokeWidth={1.75} />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-slate-900 transition-colors">
+                      <h3 className="text-xl font-bold text-stone-900 mb-3 group-hover:text-indigo-600 transition-colors">
                         {benefit.title}
                       </h3>
-                      <p className="text-base text-gray-600 leading-relaxed">
+                      <p className="text-base text-stone-600 leading-relaxed font-medium">
                         {benefit.description}
                       </p>
                       
                       {/* Accent Line on hover */}
-                      <div className="absolute bottom-0 left-8 right-8 h-1 scale-x-0 bg-gradient-to-r from-indigo-500 to-cyan-500 transition-transform duration-500 group-hover:scale-x-100 rounded-t-full origin-left opacity-80" />
+                      <div className="absolute bottom-0 left-8 right-8 h-1 scale-x-0 bg-indigo-600 transition-transform duration-500 group-hover:scale-x-100 rounded-t-full origin-left opacity-80" />
                     </motion.div>
                   );
                 })}
@@ -180,20 +180,20 @@ export default function WhyChooseUsSection() {
                     <motion.div 
                       key={benefit.title}
                       variants={fadeUp}
-                      className={`group relative flex flex-col rounded-xl bg-white p-8 shadow-sm border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${benefit.shadowColor} ${benefit.borderColor} hover:border-transparent`}
+                      className={`group relative flex flex-col rounded-xl bg-white p-8 shadow-sm border border-warm-sage transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${benefit.shadowColor} ${benefit.borderColor} hover:border-transparent`}
                     >
-                      <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-lg ${benefit.bgColor} ${benefit.color} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3`}>
+                      <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-lg ${benefit.bgColor} ${benefit.color} transition-transform duration-300 group-hover:scale-110`}>
                         <Icon className="h-7 w-7" strokeWidth={1.75} />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-slate-900 transition-colors">
+                      <h3 className="text-xl font-bold text-stone-900 mb-3 group-hover:text-indigo-600 transition-colors">
                         {benefit.title}
                       </h3>
-                      <p className="text-base text-gray-600 leading-relaxed">
+                      <p className="text-base text-stone-600 leading-relaxed font-medium">
                         {benefit.description}
                       </p>
 
                       {/* Accent Line on hover */}
-                      <div className="absolute bottom-0 left-8 right-8 h-1 scale-x-0 bg-gradient-to-r from-indigo-500 to-cyan-500 transition-transform duration-500 group-hover:scale-x-100 rounded-t-full origin-left opacity-80" />
+                      <div className="absolute bottom-0 left-8 right-8 h-1 scale-x-0 bg-indigo-600 transition-transform duration-500 group-hover:scale-x-100 rounded-t-full origin-left opacity-80" />
                     </motion.div>
                   );
                 })}

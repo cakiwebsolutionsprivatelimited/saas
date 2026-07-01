@@ -5,11 +5,11 @@ export function SectionHeading({ title, subtitle, align = 'center', className = 
 
   return (
     <div className={`mb-12 md:mb-16 max-w-3xl ${alignmentClass} ${className}`}>
-      <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      <h2 className="text-3xl font-extrabold tracking-tight text-stone-900 sm:text-4xl">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-4 text-lg text-gray-600">
+        <p className="mt-4 text-lg text-stone-600 leading-relaxed font-medium">
           {subtitle}
         </p>
       )}
