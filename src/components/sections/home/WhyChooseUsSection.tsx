@@ -153,7 +153,7 @@ export default function WhyChooseUsSection() {
                     <motion.div 
                       key={benefit.title}
                       variants={fadeUp}
-                      className={`group relative flex flex-col rounded-xl bg-white p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-100 transition-all duration-300 hover:-translate-y-[3px] hover:shadow-xl ${benefit.shadowColor} ${benefit.borderColor} hover:border-transparent`}
+                      className={`group relative flex flex-col rounded-xl bg-white p-8 shadow-sm border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${benefit.shadowColor} ${benefit.borderColor} hover:border-transparent`}
                     >
                       <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-lg ${benefit.bgColor} ${benefit.color} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3`}>
                         <Icon className="h-7 w-7" strokeWidth={1.75} />
@@ -166,7 +166,7 @@ export default function WhyChooseUsSection() {
                       </p>
                       
                       {/* Accent Line on hover */}
-                      <div className="absolute bottom-0 left-8 right-8 h-[3px] scale-x-0 bg-gradient-to-r from-indigo-500 to-cyan-500 transition-transform duration-500 group-hover:scale-x-100 rounded-t-full origin-left opacity-80" />
+                      <div className="absolute bottom-0 left-8 right-8 h-1 scale-x-0 bg-gradient-to-r from-indigo-500 to-cyan-500 transition-transform duration-500 group-hover:scale-x-100 rounded-t-full origin-left opacity-80" />
                     </motion.div>
                   );
                 })}
@@ -180,7 +180,7 @@ export default function WhyChooseUsSection() {
                     <motion.div 
                       key={benefit.title}
                       variants={fadeUp}
-                      className={`group relative flex flex-col rounded-xl bg-white p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-100 transition-all duration-300 hover:-translate-y-[3px] hover:shadow-xl ${benefit.shadowColor} ${benefit.borderColor} hover:border-transparent`}
+                      className={`group relative flex flex-col rounded-xl bg-white p-8 shadow-sm border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${benefit.shadowColor} ${benefit.borderColor} hover:border-transparent`}
                     >
                       <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-lg ${benefit.bgColor} ${benefit.color} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3`}>
                         <Icon className="h-7 w-7" strokeWidth={1.75} />
@@ -193,7 +193,7 @@ export default function WhyChooseUsSection() {
                       </p>
 
                       {/* Accent Line on hover */}
-                      <div className="absolute bottom-0 left-8 right-8 h-[3px] scale-x-0 bg-gradient-to-r from-indigo-500 to-cyan-500 transition-transform duration-500 group-hover:scale-x-100 rounded-t-full origin-left opacity-80" />
+                      <div className="absolute bottom-0 left-8 right-8 h-1 scale-x-0 bg-gradient-to-r from-indigo-500 to-cyan-500 transition-transform duration-500 group-hover:scale-x-100 rounded-t-full origin-left opacity-80" />
                     </motion.div>
                   );
                 })}

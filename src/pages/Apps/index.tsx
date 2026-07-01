@@ -391,7 +391,7 @@ export default function Apps() {
                       if (!app) return null;
                       const Icon = app.icon;
                       return (
-                        <React.Fragment key={app.id}>
+                        <React.Fragment key={`${step.id}-${appIdx}`}>
                           <div className="flex flex-col items-center relative z-10 flex-1 group mt-4 md:mt-0">
                             <div className="h-20 w-20 rounded-lg bg-white border-2 border-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm mb-6 group-hover:border-indigo-600 group-hover:-translate-y-1 group-hover:shadow-md transition-all duration-300">
                               {Icon && <Icon className="h-8 w-8" />}

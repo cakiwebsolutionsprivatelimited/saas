@@ -385,12 +385,13 @@ export default function Login() {
                     >
                       Password
                     </label>
-                    <a
-                      href="#"
-                      className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors focus:outline-none focus:underline"
+                    <button
+                      type="button"
+                      onClick={() => alert("Please contact your system administrator to reset your password.")}
+                      className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors focus:outline-none focus:underline bg-transparent border-0 p-0 cursor-pointer"
                     >
                       Forgot password?
-                    </a>
+                    </button>
                   </div>
                   <div className="relative">
                     <Lock

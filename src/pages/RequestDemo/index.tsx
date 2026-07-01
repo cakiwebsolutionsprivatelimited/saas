@@ -37,9 +37,7 @@ export default function RequestDemo() {
     
     // Simulate API call for now
     setTimeout(() => {
-      // NOTE: Success state simulation is intentionally omitted per requirements.
-      // Ready to be connected to real backend API.
-      setFormStatus('idle');
+      setFormStatus('success');
     }, 1000);
   };
 
@@ -115,78 +113,99 @@ export default function RequestDemo() {
             {/* Form Column */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={slideInLeft} className="w-full lg:w-2/3 bg-white border border-warm-sage rounded-xl p-8 lg:p-12 shadow-sm">
               <h3 className="text-3xl font-extrabold text-stone-900 mb-8">Request Your Consultation</h3>
-              <form className="space-y-6" onSubmit={handleFormSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-stone-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                    <input type="text" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="John" />
+              {formStatus === 'success' ? (
+                <div className="py-12 text-center space-y-6" role="alert" aria-live="polite">
+                  <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                    <CheckCircle2 className="h-10 w-10" />
                   </div>
-                  <div>
-                    <label className="block text-sm font-bold text-stone-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                    <input type="text" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="Doe" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-stone-700 mb-2">Business Email <span className="text-red-500">*</span></label>
-                    <input type="email" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="john@company.com" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-stone-700 mb-2">Phone Number <span className="text-red-500">*</span></label>
-                    <input type="tel" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="+1 (555) 000-0000" />
+                  <h4 className="text-2xl font-extrabold text-stone-900">Consultation Request Received!</h4>
+                  <p className="text-stone-600 font-medium max-w-md mx-auto leading-relaxed">
+                    Thank you for reaching out. A specialized solutions consultant will review your operational bottlenecks and contact you within <span className="font-bold text-stone-800">1 business day</span> to schedule your live working session.
+                  </p>
+                  <div className="pt-4">
+                    <button
+                      type="button"
+                      onClick={() => setFormStatus('idle')}
+                      className="inline-flex items-center justify-center rounded-md border border-stone-300 bg-white px-6 py-3 text-sm font-bold text-stone-700 shadow-sm hover:bg-stone-50 transition-colors"
+                    >
+                      Submit Another Request
+                    </button>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-stone-700 mb-2">Company Name <span className="text-red-500">*</span></label>
-                    <input type="text" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="Acme Corp" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-stone-700 mb-2">Company Size <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                      <select required className="w-full appearance-none rounded-md border border-warm-sage bg-white px-4 py-3 pr-10 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
-                        <option value="">Select size...</option>
-                        <option value="1-10">1-10 Employees</option>
-                        <option value="11-50">11-50 Employees</option>
-                        <option value="51-200">51-200 Employees</option>
-                        <option value="201-500">201-500 Employees</option>
-                        <option value="500+">500+ Employees</option>
-                      </select>
-                      <ChevronDown className="absolute right-3 top-3.5 h-5 w-5 text-stone-400 pointer-events-none" />
+              ) : (
+                <form className="space-y-6" onSubmit={handleFormSubmit}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="firstName" className="block text-sm font-bold text-stone-700 mb-2">First Name <span className="text-red-500">*</span></label>
+                      <input id="firstName" name="firstName" type="text" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="John" />
+                    </div>
+                    <div>
+                      <label htmlFor="lastName" className="block text-sm font-bold text-stone-700 mb-2">Last Name <span className="text-red-500">*</span></label>
+                      <input id="lastName" name="lastName" type="text" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="Doe" />
                     </div>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Current Challenges (How can we help?) <span className="text-red-500">*</span></label>
-                  <p className="text-xs text-stone-500 mb-2 font-medium">Briefly describe your operational bottlenecks. Bullet points are perfectly fine.</p>
-                  <textarea required rows={4} className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="We are currently struggling with..."></textarea>
-                </div>
-                
-                <div className="flex items-start mt-4">
-                  <div className="flex h-6 items-center">
-                    <input id="privacy" name="privacy" type="checkbox" required className="h-4 w-4 rounded border-warm-sage text-indigo-600 focus:ring-indigo-600" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-bold text-stone-700 mb-2">Business Email <span className="text-red-500">*</span></label>
+                      <input id="email" name="email" type="email" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="john@company.com" />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-bold text-stone-700 mb-2">Phone Number <span className="text-red-500">*</span></label>
+                      <input id="phone" name="phone" type="tel" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="+1 (555) 000-0000" />
+                    </div>
                   </div>
-                  <div className="ml-3 text-sm leading-6">
-                    <label htmlFor="privacy" className="font-medium text-stone-600">
-                      I agree to the privacy policy and consent to being contacted regarding this request. <span className="text-red-500">*</span>
-                    </label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="companyName" className="block text-sm font-bold text-stone-700 mb-2">Company Name <span className="text-red-500">*</span></label>
+                      <input id="companyName" name="companyName" type="text" required className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="Acme Corp" />
+                    </div>
+                    <div>
+                      <label htmlFor="companySize" className="block text-sm font-bold text-stone-700 mb-2">Company Size <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <select id="companySize" name="companySize" required className="w-full appearance-none rounded-md border border-warm-sage bg-white px-4 py-3 pr-10 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                          <option value="">Select size...</option>
+                          <option value="1-10">1-10 Employees</option>
+                          <option value="11-50">11-50 Employees</option>
+                          <option value="51-200">51-200 Employees</option>
+                          <option value="201-500">201-500 Employees</option>
+                          <option value="500+">500+ Employees</option>
+                        </select>
+                        <ChevronDown className="absolute right-3 top-3.5 h-5 w-5 text-stone-400 pointer-events-none" />
+                      </div>
+                    </div>
                   </div>
-                </div>
+                  <div>
+                    <label htmlFor="challenges" className="block text-sm font-bold text-stone-700 mb-1">Current Challenges (How can we help?) <span className="text-red-500">*</span></label>
+                    <p className="text-xs text-stone-500 mb-2 font-medium">Briefly describe your operational bottlenecks. Bullet points are perfectly fine.</p>
+                    <textarea id="challenges" name="challenges" required rows={4} className="w-full rounded-md border border-warm-sage bg-white px-4 py-3 text-stone-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="We are currently struggling with..."></textarea>
+                  </div>
+                  
+                  <div className="flex items-start mt-4">
+                    <div className="flex h-6 items-center">
+                      <input id="privacy" name="privacy" type="checkbox" required className="h-4 w-4 rounded border-warm-sage text-indigo-600 focus:ring-indigo-600" />
+                    </div>
+                    <div className="ml-3 text-sm leading-6">
+                      <label htmlFor="privacy" className="font-medium text-stone-600">
+                        I agree to the privacy policy and consent to being contacted regarding this request. <span className="text-red-500">*</span>
+                      </label>
+                    </div>
+                  </div>
 
-                <div className="pt-2">
-                  <button 
-                    type="submit" 
-                    disabled={formStatus === 'loading'}
-                    className="w-full rounded-md bg-indigo-600 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-500 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 disabled:opacity-70 flex justify-center items-center"
-                  >
-                    {formStatus === 'loading' ? 'Submitting...' : 'Request Consultation'}
-                  </button>
-                  <div className="mt-4 flex items-center justify-center text-sm font-medium text-stone-500">
-                    <Lock className="h-4 w-4 mr-1.5 text-stone-400" />
-                    Secure submission. We respect your privacy and will reply within 1 business day.
+                  <div className="pt-2">
+                    <button 
+                      type="submit" 
+                      disabled={formStatus === 'loading'}
+                      className="w-full rounded-md bg-indigo-600 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-500 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 disabled:opacity-70 flex justify-center items-center"
+                    >
+                      {formStatus === 'loading' ? 'Submitting...' : 'Request Consultation'}
+                    </button>
+                    <div className="mt-4 flex items-center justify-center text-sm font-medium text-stone-500">
+                      <Lock className="h-4 w-4 mr-1.5 text-stone-400" />
+                      Secure submission. We respect your privacy and will reply within 1 business day.
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              )}
             </motion.div>
 
             {/* Panel Column */}
@@ -387,6 +406,7 @@ export default function RequestDemo() {
             </p>
             <a
               href="#form"
+              aria-label="Scroll to demo request form"
               className="inline-flex h-14 items-center justify-center rounded-md bg-indigo-600 px-8 text-lg font-bold text-white shadow-sm transition-all hover:bg-indigo-500 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
             >
               Book Your Consultation

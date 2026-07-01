@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Section } from '../../ui/Section';
 import { Container } from '../../ui/Container';
 import { apps } from '../../../data/apps';
@@ -135,9 +136,9 @@ export default function FeaturedAppsSection() {
                     const AppIcon = Theme.icon;
                     
                     return (
-                      <a 
+                      <Link 
                         key={app.id}
-                        href={`/apps/${app.id}`}
+                        to={`/apps/${app.id}`}
                         className="group flex items-start gap-4 rounded-lg p-4 transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200 hover:shadow-sm"
                       >
                         <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-md transition-transform duration-300 group-hover:scale-110 shadow-sm ${Theme.classes}`}>
@@ -158,17 +159,17 @@ export default function FeaturedAppsSection() {
                             {app.description}
                           </p>
                         </div>
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>
                 
                 {/* Explore Category Link */}
                 <div className="mt-6 pt-6 border-t border-slate-100 flex justify-end">
-                  <a href={`/categories/${category.id}`} className="group/link inline-flex items-center text-sm font-bold text-indigo-600 hover:text-indigo-500 transition-colors">
+                  <Link to="/apps" className="group/link inline-flex items-center text-sm font-bold text-indigo-600 hover:text-indigo-500 transition-colors">
                     Explore {category.title}
                     <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-                  </a>
+                  </Link>
                 </div>
               </motion.div>
             );

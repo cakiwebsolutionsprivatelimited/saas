@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Section } from '../../ui/Section';
 import { Container } from '../../ui/Container';
 import { 
@@ -145,12 +146,12 @@ export default function IndustrySolutionsSection() {
                    </ul>
                  </div>
                  
-                 <a 
-                   href={`#${activeIndustry.id}`}
+                 <Link 
+                   to="/industries"
                    className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-md bg-indigo-600 px-6 py-4 text-sm font-bold text-white hover:bg-indigo-500 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-white shadow-sm"
                  >
                    Explore Solution <ArrowRight className="h-4 w-4" />
-                 </a>
+                 </Link>
                  </motion.div>
                </AnimatePresence>
              </motion.div>
@@ -174,6 +175,8 @@ export default function IndustrySolutionsSection() {
                     key={ind.id}
                     variants={fadeUp}
                     onClick={() => setActiveIndex(idx)}
+                    aria-pressed={isActive}
+                    aria-label={`Select industry solution for ${ind.name}`}
                     className={`group relative flex items-center justify-between rounded-lg p-4 text-left transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${
                       isActive 
                         ? 'bg-warm-cream ring-1 ring-stone-300 shadow-sm' 

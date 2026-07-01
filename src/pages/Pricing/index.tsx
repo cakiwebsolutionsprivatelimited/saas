@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '../../components/ui/Container';
 import { Section } from '../../components/ui/Section';
 import { CTA_ROUTES } from '../../constants';
+import { pricingPlans } from '../../data/pricing';
 import { staggerContainer, fadeUp, slideInLeft, slideInRight } from '../../utils/animations';
 import { 
   ArrowRight, 
@@ -47,7 +48,7 @@ export default function Pricing() {
       title: "Scaling Operations",
       subtitle: "For rapidly growing organizations",
       description: "You are handling high transaction volumes across multiple locations or entities. You need advanced automation, complex inventory routing, and deep analytics.",
-      recommendedPlan: "Growth",
+      recommendedPlan: "Professional",
       icon: <TrendingUp className="h-5 w-5" />
     },
     {
@@ -56,73 +57,6 @@ export default function Pricing() {
       description: "You manage complex, multi-layered operations and require bespoke API integrations, stringent SLA guarantees, and enterprise-grade security controls.",
       recommendedPlan: "Enterprise",
       icon: <Building2 className="h-5 w-5" />
-    }
-  ];
-
-  const plans = [
-    {
-      name: "Starter",
-      target: "Best for establishing core processes",
-      priceMonthly: 49,
-      priceAnnually: 39,
-      description: "Essential tools to get your business operations off the ground.",
-      features: [
-        "Up to 5 Users",
-        "Basic CRM & Sales tracking",
-        "Invoicing & Payments",
-        "Standard Reporting"
-      ],
-      highlighted: false,
-      ctaText: "Request Demo",
-      ctaLink: CTA_ROUTES.requestDemo
-    },
-    {
-      name: "Business",
-      target: "Best for standardizing workflows",
-      priceMonthly: 99,
-      priceAnnually: 79,
-      description: "Complete platform visibility for teams needing to eliminate silos.",
-      features: [
-        "Up to 20 Users",
-        "Advanced CRM & Automation",
-        "Full Finance Suite",
-        "Inventory Management"
-      ],
-      highlighted: true, // Subtle highlighting
-      ctaText: "Request Demo",
-      ctaLink: CTA_ROUTES.requestDemo
-    },
-    {
-      name: "Growth",
-      target: "Best for scaling operations",
-      priceMonthly: 249,
-      priceAnnually: 199,
-      description: "Advanced capabilities for multi-department organizations.",
-      features: [
-        "Up to 50 Users",
-        "Project Portfolio Management",
-        "Multi-location Inventory",
-        "Advanced Analytics"
-      ],
-      highlighted: false,
-      ctaText: "Request Demo",
-      ctaLink: CTA_ROUTES.requestDemo
-    },
-    {
-      name: "Enterprise",
-      target: "Best for complex organizations",
-      priceMonthly: "Custom",
-      priceAnnually: "Custom",
-      description: "Tailored solutions, dedicated support, and advanced security.",
-      features: [
-        "Unlimited Users",
-        "Custom Workflows & API",
-        "Multi-entity Finance",
-        "Dedicated Account Manager"
-      ],
-      highlighted: false,
-      ctaText: "Request Demo",
-      ctaLink: CTA_ROUTES.requestDemo
     }
   ];
 
@@ -356,7 +290,7 @@ export default function Pricing() {
                     {profiles[activeProfileIndex].description}
                   </p>
                   
-                  <a href="#pricing-plans" className="inline-flex h-14 items-center justify-center rounded-md bg-stone-900 px-8 text-lg font-bold text-white shadow-sm transition-all hover:bg-stone-800 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-cream">
+                  <a href="#pricing-plans" aria-label="View pricing details" className="inline-flex h-14 items-center justify-center rounded-md bg-stone-900 px-8 text-lg font-bold text-white shadow-sm transition-all hover:bg-stone-800 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-cream">
                     View Pricing Details
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
@@ -385,6 +319,7 @@ export default function Pricing() {
             {/* Billing Toggle */}
             <div className="flex items-center p-1 bg-warm-cream rounded-lg border border-warm-sage shrink-0">
               <button
+                type="button"
                 onClick={() => setBillingCycle('monthly')}
                 className={`px-6 py-2.5 rounded-md text-sm font-bold transition-all ${
                   billingCycle === 'monthly' 
@@ -395,6 +330,7 @@ export default function Pricing() {
                 Monthly
               </button>
               <button
+                type="button"
                 onClick={() => setBillingCycle('annually')}
                 className={`px-6 py-2.5 rounded-md text-sm font-bold transition-all flex items-center ${
                   billingCycle === 'annually' 
@@ -417,16 +353,16 @@ export default function Pricing() {
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 rounded-2xl overflow-hidden border border-warm-sage shadow-sm"
           >
-            {plans.map((plan, idx) => (
+            {pricingPlans.map((plan) => (
               <motion.div 
                 variants={fadeUp}
-                key={idx}
+                key={plan.id}
                 className={`p-8 flex flex-col border-b lg:border-b-0 lg:border-r border-warm-sage last:border-r-0 ${
-                  plan.highlighted ? 'bg-indigo-50/40 relative' : 'bg-white'
+                  plan.isPopular ? 'bg-indigo-50/40 relative' : 'bg-white'
                 }`}
               >
                 {/* Remove heavy badges, use subtle top border if highlighted */}
-                {plan.highlighted && (
+                {plan.isPopular && (
                   <div className="absolute top-0 left-0 right-0 h-1 bg-indigo-600"></div>
                 )}
                 
@@ -435,19 +371,12 @@ export default function Pricing() {
                   <p className="text-sm font-bold text-stone-500 uppercase tracking-wide mb-8 h-10">{plan.target}</p>
                   
                   <div className="flex items-baseline mb-2">
-                    {typeof plan.priceMonthly === 'number' ? (
-                      <>
-                        <span className="text-3xl font-extrabold text-stone-900">$</span>
-                        <span className="text-5xl font-extrabold text-stone-900 tracking-tight">
-                          {billingCycle === 'monthly' ? plan.priceMonthly : plan.priceAnnually}
-                        </span>
-                        <span className="text-stone-500 ml-2 font-medium">/user/mo</span>
-                      </>
-                    ) : (
-                      <span className="text-4xl font-extrabold text-stone-900">Custom</span>
-                    )}
+                    <span className="text-5xl font-extrabold text-stone-900 tracking-tight">
+                      {billingCycle === 'monthly' ? plan.price : (plan.priceAnnually || plan.price)}
+                    </span>
+                    {plan.period && <span className="text-stone-500 ml-2 font-medium">{plan.period}</span>}
                   </div>
-                  {typeof plan.priceMonthly === 'number' && (
+                  {plan.period && (
                     <p className="text-sm text-stone-500 font-medium h-5">
                       {billingCycle === 'annually' ? `Billed annually` : `Billed monthly`}
                     </p>
@@ -468,9 +397,9 @@ export default function Pricing() {
                 </ul>
 
                 <Link
-                  to={plan.ctaLink}
+                  to={plan.ctaLink || '/request-demo'}
                   className={`w-full h-12 inline-flex items-center justify-center rounded-md text-base font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-                    plan.highlighted
+                    plan.isPopular
                       ? 'bg-indigo-600 text-white hover:bg-indigo-500 hover:-translate-y-0.5 shadow-sm hover:shadow-md focus-visible:ring-indigo-600'
                       : 'bg-white border border-stone-300 text-stone-900 hover:bg-stone-50 hover:-translate-y-0.5 shadow-sm hover:shadow-md focus-visible:ring-stone-500'
                   }`}
@@ -510,7 +439,7 @@ export default function Pricing() {
                     <th className="p-6 font-extrabold text-stone-900 w-1/3 text-lg">Capabilities</th>
                     <th className="p-6 font-bold text-stone-900 text-center w-1/6">Starter</th>
                     <th className="p-6 font-bold text-stone-900 text-center w-1/6">Business</th>
-                    <th className="p-6 font-bold text-stone-900 text-center w-1/6">Growth</th>
+                    <th className="p-6 font-bold text-stone-900 text-center w-1/6">Professional</th>
                     <th className="p-6 font-bold text-stone-900 text-center w-1/6">Enterprise</th>
                   </tr>
                 </thead>

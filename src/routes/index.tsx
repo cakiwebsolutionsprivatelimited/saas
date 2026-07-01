@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import WebsiteLayout from '../layouts/WebsiteLayout';
 import Home from '../pages/Home';
 import Apps from '../pages/Apps';
@@ -19,6 +19,14 @@ export default function AppRoutes() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/industries" element={<Industries />} />
         <Route path="/request-demo" element={<RequestDemo />} />
+        
+        {/* Redirects for dead navigation / uncreated pages */}
+        <Route path="/about" element={<Navigate to="/" replace />} />
+        <Route path="/contact" element={<Navigate to="/request-demo" replace />} />
+        <Route path="/privacy" element={<Navigate to="/" replace />} />
+        <Route path="/terms" element={<Navigate to="/" replace />} />
+        <Route path="/categories/*" element={<Navigate to="/apps" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
 
       {/* Application auth pages — isolated, no marketing shell */}
