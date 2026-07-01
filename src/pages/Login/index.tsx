@@ -1,21 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Lock, Mail, ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { 
+  Lock, 
+  Mail, 
+  ArrowLeft, 
+  Eye, 
+  EyeOff, 
+  Users, 
+  ShoppingCart, 
+  TrendingUp, 
+  HeartHandshake, 
+  Briefcase, 
+  Sparkles, 
+  Layers 
+} from 'lucide-react';
 import logo from '../../assets/newlogo.png';
 import { SITE_CONFIG } from '../../constants';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Connected Platform Architecture — pure SVG + Framer Motion
+// Connected Platform Architecture — High Contrast Executive Visualization
 // ─────────────────────────────────────────────────────────────────────────────
 
 const MODULE_NODES = [
-  { id: 'crm',       label: 'CRM',       angle: -90,  radius: 155 },
-  { id: 'inventory', label: 'Inventory', angle: -30,  radius: 155 },
-  { id: 'finance',   label: 'Finance',   angle:  30,  radius: 155 },
-  { id: 'hr',        label: 'HR',        angle:  90,  radius: 155 },
-  { id: 'projects',  label: 'Projects',  angle:  150, radius: 155 },
-  { id: 'marketing', label: 'Marketing', angle: -150, radius: 155 },
+  { id: 'crm',       label: 'CRM',       angle: -90,  radius: 160, icon: Users,          color: 'bg-indigo-600',    glow: 'shadow-indigo-500/40' },
+  { id: 'inventory', label: 'Inventory', angle: -30,  radius: 160, icon: ShoppingCart,   color: 'bg-emerald-600',   glow: 'shadow-emerald-500/40' },
+  { id: 'finance',   label: 'Finance',   angle:  30,  radius: 160, icon: TrendingUp,     color: 'bg-blue-600',      glow: 'shadow-blue-500/40' },
+  { id: 'hr',        label: 'HR',        angle:  90,  radius: 160, icon: HeartHandshake, color: 'bg-violet-600',    glow: 'shadow-violet-500/40' },
+  { id: 'projects',  label: 'Projects',  angle:  150, radius: 160, icon: Briefcase,      color: 'bg-amber-600',     glow: 'shadow-amber-500/40' },
+  { id: 'marketing', label: 'Marketing', angle: -150, radius: 160, icon: Sparkles,       color: 'bg-rose-600',      glow: 'shadow-rose-500/40' },
 ];
 
 function toXY(angle: number, radius: number, cx: number, cy: number) {
@@ -32,9 +45,9 @@ interface PacketProps {
 function DataPacket({ pathString, delay, duration }: PacketProps) {
   return (
     <motion.circle
-      r={2.5}
-      fill="#6366f1"
-      opacity={0.7}
+      r={3}
+      fill="#38bdf8"
+      opacity={0.9}
       initial={{ offsetDistance: '0%' }}
       animate={{ offsetDistance: ['0%', '100%'] }}
       transition={{
@@ -47,6 +60,7 @@ function DataPacket({ pathString, delay, duration }: PacketProps) {
       style={{
         offsetPath: `path("${pathString}")`,
         offsetRotate: '0deg',
+        filter: 'drop-shadow(0 0 6px rgba(56, 189, 248, 0.8))',
       } as React.CSSProperties}
     />
   );
@@ -58,7 +72,6 @@ function PlatformGraph() {
 
   const nodes = MODULE_NODES.map((n) => {
     const { x, y } = toXY(n.angle, n.radius, cx, cy);
-    // Subtle bezier curve control point calculation
     const midX = (cx + x) / 2;
     const midY = (cy + y) / 2;
     const perpAngle = n.angle - 25;
@@ -69,139 +82,126 @@ function PlatformGraph() {
       ...n,
       x, y,
       path: `M ${cx} ${cy} Q ${qx} ${qy} ${x} ${y}`,
-      returnPath: `M ${x} ${y} Q ${qx} ${qy} ${cx} ${cy}`
+      returnPath: `M ${x} ${y} Q ${qx} ${qy} ${cx} ${cy}`,
     };
   });
 
   return (
-    <svg
-      viewBox="0 0 480 480"
-      className="w-full h-full"
-      aria-hidden="true"
-    >
-      <defs>
-        {/* Subtle radial bg gradient */}
-        <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#e0e7ff" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#f8fafc" stopOpacity="0" />
-        </radialGradient>
-        {/* Center node gradient */}
-        <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#6366f1" />
-          <stop offset="100%" stopColor="#4338ca" />
-        </radialGradient>
-        {/* Module node fill */}
-        <radialGradient id="nodeGrad" cx="30%" cy="30%" r="70%">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#f1f5f9" />
-        </radialGradient>
-      </defs>
-
-      {/* Very faint background circle */}
-      <circle cx={cx} cy={cy} r={190} fill="url(#bgGrad)" />
-
-      {/* Orbit ring */}
-      <motion.circle
-        cx={cx} cy={cy} r={155}
-        fill="none"
-        stroke="#6366f1"
-        strokeWidth={0.5}
-        strokeDasharray="4 8"
-        opacity={0.2}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
-        style={{ originX: `${cx}px`, originY: `${cy}px` }}
-      />
-
-      {/* Connection lines from center to each module */}
-      {nodes.map((n, idx) => (
-        <g key={`line-${n.id}`}>
-          <path
-            d={n.path}
-            stroke="#6366f1"
-            fill="none"
-            strokeWidth={0.75}
-            strokeDasharray="3 6"
-            opacity={0.18}
-          />
-          {/* Animated data packets — one per edge, staggered */}
-          <DataPacket
-            pathString={n.path}
-            delay={idx * 1.4}
-            duration={4.5}
-          />
-          {/* Return packet */}
-          <DataPacket
-            pathString={n.returnPath}
-            delay={idx * 1.4 + 2.2}
-            duration={4.5}
-          />
-        </g>
-      ))}
-
-      {/* Module nodes */}
-      {nodes.map((n) => (
-        <motion.g
-          key={n.id}
-          animate={{ y: [0, n.angle < 0 ? -3 : 3, 0] }}
-          transition={{ duration: 6 + (n.radius % 3), repeat: Infinity, ease: 'easeInOut' }}
-        >
-          {/* Node circle */}
-          <circle cx={n.x} cy={n.y} r={28} fill="url(#nodeGrad)" stroke="#e2e8f0" strokeWidth={1} />
-          {/* Node label */}
-          <text
-            x={n.x}
-            y={n.y + 4}
-            textAnchor="middle"
-            fontSize="9"
-            fontWeight="600"
-            fill="#475569"
-            fontFamily="'Geist Variable', sans-serif"
-            letterSpacing="0.5"
-          >
-            {n.label}
-          </text>
-          {/* Small status dot */}
-          <circle cx={n.x + 20} cy={n.y - 20} r={4} fill="#10b981" opacity={0.9} />
-        </motion.g>
-      ))}
-
-      {/* Center node — Connected Platform */}
-      <motion.g
-        animate={{ scale: [1, 1.02, 1] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ originX: `${cx}px`, originY: `${cy}px` }}
+    <div className="relative w-full h-full select-none">
+      {/* Background SVG for glowing orbit rings, connection paths, and animated data packets */}
+      <svg
+        viewBox="0 0 480 480"
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        aria-hidden="true"
       >
-        {/* Outer glow ring */}
-        <circle cx={cx} cy={cy} r={48} fill="#6366f1" opacity={0.06} />
-        <circle cx={cx} cy={cy} r={40} fill="url(#centerGrad)" />
-        {/* Platform label */}
-        <text
-          x={cx}
-          y={cy - 4}
-          textAnchor="middle"
-          fontSize="8"
-          fontWeight="700"
-          fill="white"
-          fontFamily="'Geist Variable', sans-serif"
-          letterSpacing="0.8"
+        <defs>
+          <radialGradient id="bgGradDark" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#6366f1" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#0f111a" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* Faint background glow */}
+        <circle cx={cx} cy={cy} r={210} fill="url(#bgGradDark)" />
+
+        {/* Outer Orbit dashed ring */}
+        <motion.circle
+          cx={cx} cy={cy} r={160}
+          fill="none"
+          stroke="#818cf8"
+          strokeWidth={1}
+          strokeDasharray="6 8"
+          opacity={0.3}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+          style={{ originX: `${cx}px`, originY: `${cy}px` }}
+        />
+
+        {/* Inner subtle orbit ring */}
+        <circle
+          cx={cx} cy={cy} r={90}
+          fill="none"
+          stroke="#6366f1"
+          strokeWidth={0.75}
+          strokeDasharray="3 6"
+          opacity={0.2}
+        />
+
+        {/* Connection lines from center to each module */}
+        {nodes.map((n, idx) => (
+          <g key={`line-${n.id}`}>
+            <path
+              d={n.path}
+              stroke="#818cf8"
+              fill="none"
+              strokeWidth={1.5}
+              strokeDasharray="4 6"
+              opacity={0.35}
+            />
+            {/* Animated data packets — one per edge, staggered */}
+            <DataPacket
+              pathString={n.path}
+              delay={idx * 1.2}
+              duration={4}
+            />
+            {/* Return packet */}
+            <DataPacket
+              pathString={n.returnPath}
+              delay={idx * 1.2 + 2}
+              duration={4}
+            />
+          </g>
+        ))}
+      </svg>
+
+      {/* DOM Elements overlay for pixel-perfect high contrast cards */}
+      {/* Center node — Connected Platform */}
+      <div
+        style={{ left: '50%', top: '50%' }}
+        className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
+      >
+        <motion.div
+          animate={{ scale: [1, 1.04, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          className="flex flex-col items-center justify-center h-32 w-32 rounded-full bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-950 text-white shadow-[0_0_50px_rgba(99,102,241,0.6)] border-2 border-indigo-400/40 text-center p-3 cursor-pointer group hover:scale-105 transition-transform"
         >
-          CONNECTED
-        </text>
-        <text
-          x={cx}
-          y={cy + 9}
-          textAnchor="middle"
-          fontSize="8"
-          fontWeight="700"
-          fill="white"
-          fontFamily="'Geist Variable', sans-serif"
-          letterSpacing="0.8"
-        >
-          PLATFORM
-        </text>
-      </motion.g>
-    </svg>
+          <div className="flex items-center justify-center h-8 w-8 rounded-full bg-white/10 mb-1 ring-1 ring-white/20 group-hover:bg-white/20 transition-colors">
+            <Layers className="h-4 w-4 text-indigo-200" />
+          </div>
+          <span className="text-[10px] font-black tracking-widest uppercase leading-tight text-white">Connected</span>
+          <span className="text-[10px] font-black tracking-widest uppercase leading-tight text-indigo-200">Platform</span>
+          <span className="mt-1 inline-flex items-center gap-1 text-[8px] font-bold text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/40 shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live System
+          </span>
+        </motion.div>
+      </div>
+
+      {/* Module Nodes */}
+      {nodes.map((n) => {
+        const Icon = n.icon;
+        return (
+          <div
+            key={n.id}
+            style={{ left: `${(n.x / 480) * 100}%`, top: `${(n.y / 480) * 100}%` }}
+            className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
+          >
+            <motion.div
+              animate={{ y: [0, n.angle < 0 ? -4 : 4, 0] }}
+              transition={{ duration: 5 + (n.radius % 3), repeat: Infinity, ease: 'easeInOut' }}
+              className="flex items-center gap-2.5 rounded-xl bg-stone-900/95 border border-stone-700/80 px-3.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.5)] backdrop-blur-md transition-all hover:scale-110 hover:border-indigo-400 hover:bg-stone-800 cursor-pointer group ring-1 ring-white/10"
+            >
+              <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${n.color} text-white shadow-md ${n.glow}`}>
+                <Icon className="h-4 w-4" />
+              </div>
+              <span className="text-xs font-extrabold tracking-wide text-white group-hover:text-indigo-300 transition-colors">
+                {n.label}
+              </span>
+              <span className="ml-1 h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.9)]" />
+            </motion.div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -502,27 +502,27 @@ export default function Login() {
       </div>
 
       {/* ── RIGHT PANEL: Connected Platform Architecture ──────── */}
-      <div className="hidden lg:flex lg:flex-1 flex-col items-center justify-center bg-[#f8f7f4] relative overflow-hidden">
+      <div className="hidden lg:flex lg:flex-1 flex-col items-center justify-center bg-stone-900 text-white relative overflow-hidden">
 
-        {/* Very subtle dot-grid background */}
+        {/* Subtle dot-grid background */}
         <div
-          className="absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0 opacity-10 pointer-events-none"
           style={{
-            backgroundImage: 'radial-gradient(circle, #1e1b4b 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
+            backgroundImage: 'radial-gradient(circle, #818cf8 1px, transparent 1px)',
+            backgroundSize: '32px 32px',
           }}
         />
 
         {/* Faint corner gradients */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-100/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-stone-200/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-600/15 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
         {/* Graph */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
-          className="relative z-10 w-[420px] h-[420px]"
+          className="relative z-10 w-[500px] h-[500px] xl:w-[580px] xl:h-[580px] 2xl:w-[640px] 2xl:h-[640px] max-w-[90%]"
         >
           <PlatformGraph />
         </motion.div>
@@ -534,9 +534,12 @@ export default function Login() {
           transition={{ duration: 0.7, delay: 0.9 }}
           className="relative z-10 mt-8 text-center"
         >
-          <p className="text-xs font-semibold text-stone-400 tracking-widest uppercase">
-            Every department. One platform.
-          </p>
+          <div className="inline-flex items-center gap-2 rounded-full bg-stone-800/80 border border-stone-700 px-4 py-1.5 shadow-sm">
+            <span className="h-2 w-2 rounded-full bg-indigo-400 animate-ping" />
+            <p className="text-xs font-bold text-stone-300 tracking-wider uppercase">
+              Every department. One unified platform.
+            </p>
+          </div>
         </motion.div>
       </div>
 
