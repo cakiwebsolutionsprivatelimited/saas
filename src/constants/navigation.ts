@@ -5,6 +5,7 @@ export const MAIN_NAV: NavItem[] = [
   { name: 'Apps', path: '/apps' },
   { name: 'Pricing', path: '/pricing' },
   { name: 'Industry Solutions', path: '/industries' },
+  { name: 'About Us', path: '/about' },
   { name: 'Request Demo', path: '/request-demo' },
 ];
 

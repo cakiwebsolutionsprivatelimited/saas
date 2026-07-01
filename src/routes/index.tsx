@@ -6,6 +6,7 @@ import ModuleDetail from '../pages/ModuleDetail';
 import Pricing from '../pages/Pricing';
 import Industries from '../pages/Industries';
 import RequestDemo from '../pages/RequestDemo';
+import About from '../pages/About';
 import Login from '../pages/Login';
 
 export default function AppRoutes() {
@@ -21,7 +22,7 @@ export default function AppRoutes() {
         <Route path="/request-demo" element={<RequestDemo />} />
         
         {/* Redirects for dead navigation / uncreated pages */}
-        <Route path="/about" element={<Navigate to="/" replace />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Navigate to="/request-demo" replace />} />
         <Route path="/privacy" element={<Navigate to="/" replace />} />
         <Route path="/terms" element={<Navigate to="/" replace />} />
